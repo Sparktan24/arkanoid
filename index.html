@@ -58,6 +58,26 @@
   }
 
   function ballMovement () {
+    /* Wall colision */
+    if(
+      ballX + dx > canvas.width - ballRadius || //Right wall
+      ballX + dx < ballRadius //Left wall
+      ) {  
+      dx = -dx;
+    }
+    if(
+      ballY + dy < ballRadius //Top wall
+      ) {
+      dy = -dy;
+    }
+
+    if(
+      ballY + dy > canvas.height - ballRadius //Bottom wall
+      ) {
+      console.log('Game Over');
+      document.location.reload();
+    }
+
     ballX += dx;
     ballY += dy;
   }
