@@ -37,6 +37,13 @@
   let dx = 2;
   let dy = -2;
 
+  /* PADDLE VARIABLES */
+  const paddleHeight = 10;
+  const paddleWidth = 50;
+
+  let paddleX = (canvas.width - paddleWidth) / 2;
+  let paddleY = canvas.height - paddleHeight -10;
+
   function drawBall () {
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
@@ -46,7 +53,8 @@
   }
 
   function drawPaddle () {
-
+    ctx.fillStyle = '#09f';
+    ctx.fillRect(paddleX, paddleY, paddleWidth, paddleHeight);
   }
 
   function drawBricks () {
@@ -77,7 +85,7 @@
       console.log('Game Over');
       document.location.reload();
     }
-
+    /* Ball movement */
     ballX += dx;
     ballY += dy;
   }
