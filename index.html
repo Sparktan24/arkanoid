@@ -5,7 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arkanoid in JavaScript</title>
 </head>
-<body>
-  
-</body>
+
+<style>
+  body {
+    background-color: #111;
+
+  }
+  canvas {
+    border: 4px solid #fff;
+    border-bottom: transparent;
+    background-color: #000;
+    margin: 0 auto;
+    display: block;
+  }
+</style>
+<canvas></canvas>
+
+<script>
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = 448;
+  canvas.height = 400;
+
+  /* BALL VARIABLES */
+  const ballRadius = 4;
+  /* Ball position */
+  let ballX = canvas.width / 2;
+  let ballY = canvas.height -30;
+  /* Ball speed */
+  let dx = 2;
+  let dy = -2;
+
+  function drawBall () {
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function drawPaddle () {
+
+  }
+
+  function drawBricks () {
+
+  }
+
+  function collisionDetection () {
+
+  }
+
+  function ballMovement () {
+    ballX += dx;
+    ballY += dy;
+  }
+
+  function paddleMovement () {
+
+  }
+
+  function cleanCanvas () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function draw () {
+    cleanCanvas();
+    //Draw
+    drawBall();
+    drawPaddle();
+    drawBricks();
+
+    //mov and colisions
+    collisionDetection();
+    ballMovement();
+    paddleMovement();
+    window.requestAnimationFrame(draw);
+  }
+  draw();
+</script>
 </html>
