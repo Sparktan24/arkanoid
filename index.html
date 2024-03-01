@@ -44,6 +44,9 @@
   let paddleX = (canvas.width - paddleWidth) / 2;
   let paddleY = canvas.height - paddleHeight -10;
 
+  let rightPressed = false;
+  let leftPressed = false;
+
   function drawBall () {
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
@@ -62,7 +65,9 @@
   }
 
   function collisionDetection () {
-
+    if(ballY + dy == paddleY && ballX > paddleX && ballX < paddleX + paddleWidth){
+      dy = -dy;
+    }
   }
 
   function ballMovement () {
@@ -91,14 +96,43 @@
   }
 
   function paddleMovement () {
-
-  }
+    if(rightPressed && paddleX < canvas.width - paddleWidth) {
+      paddleX += 7;
+  }else if(leftPressed && paddleX > 0) {
+      paddleX -= 7;
+    }
+}
 
   function cleanCanvas () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  function initEvents () {
+    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keyup', keyUpHandler);
+
+    function keyDownHandler (e) {
+      if(e.key === 'ArrowRight') {
+        rightPressed = true;
+        //paddleX += 0.1;
+      }
+      if(e.key === 'ArrowLeft') {
+        leftPressed = true;
+        //paddleX -= 0.1;
+      }
+    }
+
+    function keyUpHandler (e) {
+      if(e.key === 'ArrowRight') {
+        rightPressed = false;
+      }else if(e.key === 'ArrowLeft') {
+        leftPressed = false;
+      }
+    }
+  }
+
   function draw () {
+   
     cleanCanvas();
     //Draw
     drawBall();
@@ -112,5 +146,6 @@
     window.requestAnimationFrame(draw);
   }
   draw();
+  initEvents();
 </script>
 </html>
